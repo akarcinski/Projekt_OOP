@@ -5,7 +5,7 @@ public class Animal{
     private int energy;
     private Direction direction;
     private int[] genes;
-    private int idxGene = -1;
+    protected int idxGene = -1;
     public Animal(Vector2d position, int energy, Direction direction, int[] genes) {
         this.position = position;
         this.energy = energy;
@@ -30,8 +30,8 @@ public class Animal{
     }
 
     public int nextMove(){
-        idxGene++;
-        idxGene %= genes.length;
+//        idxGene++;
+//        idxGene %= genes.length;
         return genes[idxGene];
     }
 
