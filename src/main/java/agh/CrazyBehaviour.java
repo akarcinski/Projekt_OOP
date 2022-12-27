@@ -3,6 +3,7 @@ package agh;
 import java.util.Random;
 
 public class CrazyBehaviour implements IBehaviourType{
+    public CrazyBehaviour(){}
     @Override
     public void nextGene(Animal animal) {
         Random rand=new Random();
