@@ -7,53 +7,71 @@ public class ForestedBiome implements IBiomeType{
     private int height;
     private int low;
     private int high;
+    private int stage_num;
+    private final Random rand=new Random();
     private ArrayList<Grass> grassArray = new ArrayList<>();
     private Map<Vector2d, Grass> hashmapa = new HashMap<>();
-    public ForestedBiome(int width, int height){
+    public ForestedBiome(int width, int height, int start_num, int stage_num){
         this.width=width;
         this.height=height;
         this.low=(int) Math.round(height*0.4);
         this.high=(int) Math.round(height*0.6);
+        this.stage_num=stage_num;
+        int placed_grass=0;
+        int x,y;
+        while (true){
+            x=rand.nextInt(width);
+            y=rand.nextInt(height);
+            Vector2d pozycja = new Vector2d(x,y);
+            if (!hashmapa.containsKey(pozycja)){
+                if (y<low | y>high){
+                    if (rand.nextInt(10)<8){
+                        Grass trawa = new Grass(pozycja);
+                        grassArray.add(trawa);
+                        hashmapa.put(pozycja, trawa);
+                        placed_grass+=1;
+                    }
+                }
+                else {
+                    if (rand.nextInt(10)<2){
+                        Grass trawa = new Grass(pozycja);
+                        grassArray.add(trawa);
+                        hashmapa.put(pozycja, trawa);
+                        placed_grass+=1;
+                    }
+                }
+            }
+            if (placed_grass>=start_num | grassArray.size()==width*height) break;
+        }
     }
 
     @Override
     public void placeGrass() {
-        Random rand = new Random();
-        for(int i=0; i<high-low+1; i++) {
-            for (int j = 0; j < width; j++) {
-                if (rand.nextInt(10) < 2) {
-                    Vector2d pozycja = new Vector2d(j, i);
-                    if (!hashmapa.containsKey(pozycja)) {
+        int placed_grass=0;
+        int x,y;
+        while (true){
+            x=rand.nextInt(width);
+            y=rand.nextInt(height);
+            Vector2d pozycja = new Vector2d(x,y);
+            if (!hashmapa.containsKey(pozycja)){
+                if (y<low | y>high){
+                    if (rand.nextInt(10)<8){
                         Grass trawa = new Grass(pozycja);
                         grassArray.add(trawa);
                         hashmapa.put(pozycja, trawa);
+                        placed_grass+=1;
                     }
                 }
-            }
-        }
-        for(int i=low; i<=high; i++){
-            for(int j=0; j<width; j++){
-                if (rand.nextInt(10)<8){
-                    Vector2d pozycja = new Vector2d(j,i);
-                    if (!hashmapa.containsKey(pozycja)){
+                else {
+                    if (rand.nextInt(10)<2){
                         Grass trawa = new Grass(pozycja);
                         grassArray.add(trawa);
                         hashmapa.put(pozycja, trawa);
+                        placed_grass+=1;
                     }
                 }
             }
-        }
-        for(int i=high+1; i<height; i++){
-            for(int j=0; j<width; j++){
-                if (rand.nextInt(10)<2){
-                    Vector2d pozycja = new Vector2d(j,i);
-                    if (!hashmapa.containsKey(pozycja)){
-                        Grass trawa = new Grass(pozycja);
-                        grassArray.add(trawa);
-                        hashmapa.put(pozycja, trawa);
-                    }
-                }
-            }
+            if (placed_grass>=stage_num | grassArray.size()==width*height) break;
         }
     }
 

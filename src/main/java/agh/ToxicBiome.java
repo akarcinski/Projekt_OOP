@@ -8,17 +8,36 @@ public class ToxicBiome implements IBiomeType{
     private Integer[][] deathArray;
     private ArrayList<Grass> grassArray = new ArrayList<>();
     private Map<Vector2d, Grass> haszmapa=new HashMap<>();
-    public ToxicBiome(int width, int height){
+    private Random rand = new Random();
+    private int stage_num;
+    public ToxicBiome(int width, int height, int start_num, int stage_num){
         this.width=width;
         this.height=height;
+        this.stage_num=stage_num;
         deathArray = new Integer[width][height];
         for(int i=0; i<width; i++){
             for(int j=0; j<height; j++){
                 deathArray[i][j]=0;
             }
         }
+        int placed_grass=0;
+        int x,y;
+        while (true){
+            x=rand.nextInt(width);
+            y=rand.nextInt(height);
+            Vector2d pozycja = new Vector2d(x,y);
+            if (!haszmapa.containsKey(pozycja)){
+                if (rand.nextInt(10)<8){
+                    Grass trawa = new Grass(pozycja);
+                    grassArray.add(trawa);
+                    haszmapa.put(pozycja, trawa);
+                    placed_grass+=1;
+                }
+            }
+            if (placed_grass>=stage_num | grassArray.size()==width*height) break;
+        }
     }
-    private Integer getMinDeath(){
+    private int getMinDeath(){
         Integer minimum=deathArray[0][0];
         for (int i=0; i<width; i++){
             for (int j=0; j<height; j++){
@@ -31,31 +50,32 @@ public class ToxicBiome implements IBiomeType{
     }
     @Override
     public void placeGrass() {
-        Random rand = new Random();
-        Integer minimum=getMinDeath();
-        for (int i=0; i<width; i++){
-            for(int j=0; j<height; j++){
-                if (deathArray[i][j].equals(minimum)){
+        int placed_grass=0;
+        int x,y;
+        int minimum=getMinDeath();
+        while (true){
+            x=rand.nextInt(width);
+            y=rand.nextInt(height);
+            Vector2d pozycja = new Vector2d(x,y);
+            if (!haszmapa.containsKey(pozycja)){
+                if (deathArray[x][y]==minimum){
                     if (rand.nextInt(10)<8){
-                        Vector2d pozycja = new Vector2d(i,j);
-                        if (!haszmapa.containsKey(pozycja)){
-                            Grass trawa = new Grass(pozycja);
-                            haszmapa.put(pozycja, trawa);
-                            grassArray.add(trawa);
-                        }
+                        Grass trawa = new Grass(pozycja);
+                        grassArray.add(trawa);
+                        haszmapa.put(pozycja, trawa);
+                        placed_grass+=1;
                     }
                 }
                 else {
                     if (rand.nextInt(10)<2){
-                        Vector2d pozycja = new Vector2d(i,j);
-                        if (!haszmapa.containsKey(pozycja)){
-                            Grass trawa = new Grass(pozycja);
-                            haszmapa.put(pozycja, trawa);
-                            grassArray.add(trawa);
-                        }
+                        Grass trawa = new Grass(pozycja);
+                        grassArray.add(trawa);
+                        haszmapa.put(pozycja, trawa);
+                        placed_grass+=1;
                     }
                 }
             }
+            if (placed_grass>=stage_num | grassArray.size()==width*height) break;
         }
     }
 

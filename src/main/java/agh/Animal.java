@@ -1,9 +1,9 @@
 package agh;
 
 public class Animal{
-    private Vector2d position;
+    protected Vector2d position;
     private int energy;
-    private Direction direction;
+    protected Direction direction;
     protected int[] genes;
     protected int idxGene = -1;
     public Animal(Vector2d position, int energy, Direction direction, int[] genes) {
@@ -29,10 +29,17 @@ public class Animal{
         this.energy += energy;
     }
 
+    public void move(Vector2d position, Direction direction){
+        this.position=position;
+        this.direction=direction;
+    }
     public int nextMove(){
 //        idxGene++;
 //        idxGene %= genes.length;
         return genes[idxGene];
+    }
+    public void setDirection(Direction direction){
+        this.direction=direction;
     }
 
 

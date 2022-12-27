@@ -25,8 +25,8 @@ abstract public class WorldMap {
     private IMutationType mutationType;  // typ mutacji:     pełna losowość, korekta
     private IBehaviourType behaviourType;// typ zachowania:  pełna predestynacja, nieco szaleństwa
 
-    private ArrayList<Grass> grassList;
-    private ArrayList<Animal> animalList;
+    private ArrayList<Grass> grassList = new ArrayList<>();
+    private ArrayList<Animal> animalList = new ArrayList<>();
     public WorldMap(int width, int height, int grassNum, int restoreEnergy, int growingRate, int animalNum, int startEnergy, int maxEnergy
             , int energyToChild, int minMutation, int maxMutation, int genomeLength,
                     IMapType mapType, IBiomeType biomeType, IMutationType mutationType, IBehaviourType behaviourType){
@@ -54,15 +54,38 @@ abstract public class WorldMap {
             for(int j=0; j<genomeLength; j++){
                 genes[j]=rand.nextInt()%8;
             }
-            this.animalList.add(new Animal(new Vector2d(x,y), maxEnergy, Direction.NN, genes));
+            this.animalList.add(new Animal(new Vector2d(x,y), maxEnergy, Direction.values[rand.nextInt(8)], genes));
         }
     }
-    public void cleanmap(){
+    public void cleanMap(){ // czysci plansze z martwych zwierzat
         for(Animal animal: animalList){
-            if (animal.getEnergy()==0){
+            if (animal.getEnergy()<=0){
                 biomeType.setDeath(animal.getPosition());
                 animalList.remove(animal);
             }
         }
+    }
+    public void changeGenesAnimals(){ // kolejnosc wykonywania genow zaleznie od zachowania jakie jest przyjete
+        for (Animal animal: animalList){
+            behaviourType.nextGene(animal);
+        }
+    }
+    public void mutateAnimals(){ // mutuje geny w zaleznosci od przyjetej mutacji
+        for (Animal animal: animalList){
+            mutationType.mutate(animal);
+        }
+    }
+    public void moveAnimals(){ // przemieszcza zwierzeta w zaleznosci od przyjetej mapy i jej ograniczen
+        for (Animal animal: animalList){
+            mapType.move(animal);
+        }
+    }
+    public void consumption(){}
+
+    public void copulation(){
+
+    }
+    public void placeGrass(){
+        biomeType.placeGrass();
     }
 }
