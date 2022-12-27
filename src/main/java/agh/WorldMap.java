@@ -45,12 +45,24 @@ abstract public class WorldMap {
         this.maxMutation=maxMutation;
         this.genomeLength=genomeLength;
         this.grassNum=grassNum;
-        placeGrass();
         Random rand = new Random();
         for(int i=0; i<animalNum; i++){
             int x=rand.nextInt(width);
             int y= rand.nextInt(height);
-            this.animalList.add(new Animal(new Vector2d(x,y), ));
+
+            int[] genes=new int[genomeLength];
+            for(int j=0; j<genomeLength; j++){
+                genes[j]=rand.nextInt()%8;
+            }
+            this.animalList.add(new Animal(new Vector2d(x,y), maxEnergy, Direction.NN, genes));
+        }
+    }
+    public void cleanmap(){
+        for(Animal animal: animalList){
+            if (animal.getEnergy()==0){
+                biomeType.setDeath(animal.getPosition());
+                animalList.remove(animal);
+            }
         }
     }
 }
