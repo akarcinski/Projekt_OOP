@@ -10,7 +10,7 @@ public class Earth implements IMapType{
 
     @Override
     public void move(Animal animal) {
-        Direction direction = Direction.values[(animal.getDirection().ordinal()+animal.nextMove())];
+        Direction direction = Direction.values[(animal.getDirection().ordinal()+animal.nextMove())%8];
         Vector2d nextposition = animal.getPosition().add(Direction.toVector2d(direction));
         if (nextposition.getX()==-1) {
             nextposition=nextposition.add(new Vector2d(width,0));
@@ -23,7 +23,7 @@ public class Earth implements IMapType{
             animal.setDirection(Direction.values[(animal.direction.ordinal()+4)%8]);
         }
         else {
-            animal.move(nextposition, direction);
+            animal.move(nextposition, direction, 1);
         }
     }
 }

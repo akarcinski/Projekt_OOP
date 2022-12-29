@@ -1,5 +1,6 @@
 package agh;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ForestedBiome implements IBiomeType{
@@ -8,6 +9,7 @@ public class ForestedBiome implements IBiomeType{
     private int low;
     private int high;
     private int stage_num;
+    private boolean[][] preferedFields;
     private final Random rand=new Random();
     private ArrayList<Grass> grassArray = new ArrayList<>();
     private Map<Vector2d, Grass> hashmapa = new HashMap<>();
@@ -16,6 +18,17 @@ public class ForestedBiome implements IBiomeType{
         this.height=height;
         this.low=(int) Math.round(height*0.4);
         this.high=(int) Math.round(height*0.6);
+        this.preferedFields = new boolean[width][height];
+        for (int i=0; i<width; i++){
+            for (int j=0; j<height; j++){
+                if (j<low | j>high){
+                    preferedFields[i][j]=false;
+                }
+                else {
+                    preferedFields[i][j]=true;
+                }
+            }
+        }
         this.stage_num=stage_num_grass;
         int placed_grass=0;
         int x,y;
@@ -43,6 +56,15 @@ public class ForestedBiome implements IBiomeType{
             }
             if (placed_grass>=start_num_grass | grassArray.size()==width*height) break;
         }
+    }
+
+    @Override
+    public boolean[][] getPreferedFields() {
+        boolean[][] copy = new boolean[width][];
+        for (int i=0; i<width; i++){
+            copy[i]=preferedFields[i].clone();
+        }
+        return copy;
     }
 
     @Override

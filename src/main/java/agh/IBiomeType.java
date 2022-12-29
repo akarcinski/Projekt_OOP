@@ -10,4 +10,5 @@ public interface IBiomeType {
     public boolean eatGrass(Vector2d position);
     public void setDeath(Vector2d position);
     public int getSize();
+    public boolean[][] getPreferedFields();
 }

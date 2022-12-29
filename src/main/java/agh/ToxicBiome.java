@@ -6,6 +6,7 @@ public class ToxicBiome implements IBiomeType{
     private int height;
     private int width;
     private Integer[][] deathArray;
+    private boolean[][] preferedFields;
     private ArrayList<Grass> grassArray = new ArrayList<>();
     private Map<Vector2d, Grass> haszmapa=new HashMap<>();
     private Random rand = new Random();
@@ -18,6 +19,12 @@ public class ToxicBiome implements IBiomeType{
         for(int i=0; i<width; i++){
             for(int j=0; j<height; j++){
                 deathArray[i][j]=0;
+            }
+        }
+        this.preferedFields = new boolean[width][height];
+        for (int i=0; i<width; i++){
+            for (int j=0; j<height; j++){
+                preferedFields[i][j]=true;
             }
         }
         int placed_grass=0;
@@ -77,6 +84,21 @@ public class ToxicBiome implements IBiomeType{
             }
             if (placed_grass>=stage_num | grassArray.size()==width*height) break;
         }
+    }
+
+    @Override
+    public boolean[][] getPreferedFields() {
+        int mindeath=getMinDeath();
+        for (int i=0; i<width; i++){
+            for (int j=0; j<height; j++){
+                this.preferedFields[i][j]= (deathArray[i][j] == mindeath);
+            }
+        }
+        boolean[][] copy = new boolean[width][];
+        for (int i=0; i<width; i++){
+            copy[i]=preferedFields[i].clone();
+        }
+        return copy;
     }
 
     @Override

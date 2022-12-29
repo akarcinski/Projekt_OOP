@@ -67,6 +67,8 @@ abstract public class WorldMap {
             this.geneSet.add(animal);
         }
     }
+
+    // DO SIMULATION ENGINE
     public void cleanMap(){ // czysci plansze z martwych zwierzat
         for(Animal animal: animalList){
             if (animal.getEnergy()<=0){
@@ -77,31 +79,24 @@ abstract public class WorldMap {
             }
         }
     }
-    public void changeGenesAnimals(){ // kolejnosc wykonywania genow zaleznie od zachowania jakie jest przyjete
+    public void changeGenesAnimals(){ // kolejnosc wykonywania genow zaleznie od zachowania jakie jest przyjete (używać na samym koncu iteracji)
         for (Animal animal: animalList){
             behaviourType.nextGene(animal);
         }
     }
-//    public void mutateAnimals(){ // mutuje geny w zaleznosci od przyjetej mutacji
-//        for (Animal animal: animalList){
-//            mutationType.mutate(animal);
-//        }
-//    }
     public void moveAnimals(){ // przemieszcza zwierzeta w zaleznosci od przyjetej mapy i jej ograniczen
         for (Animal animal: animalList){
             mapType.move(animal);
             updateTreeSet(animal);
         }
     }
-    public void consumption(){
+    public void consumption(){ // zwierzeta sobie jedza
         for (Animal animal: animalSet){
-            if (biomeType.eatGrass(animal.getPosition())){
-                if (animal.getEnergy()+restoreEnergy>maxEnergy){
-                    animal.addEnergy(maxEnergy-animal.getEnergy());
-                    updateTreeSet(animal);
-                }
-                else {
+            if (animal.getEnergy()<maxEnergy) {
+                if (biomeType.eatGrass(animal.getPosition())) {
                     animal.addEnergy(restoreEnergy);
+                    animal.addNumGrass();
+                    updateTreeSet(animal);
                 }
             }
         }
@@ -114,7 +109,7 @@ abstract public class WorldMap {
             change=false;
             for(Animal animal1: animalList){
                 for (Animal animal2: animalList){
-                    if (animal1!=animal2 & animal1.getPosition().equals(animal2.getPosition()) & animal1.getEnergy()>=energyToChild & animal2.getEnergy()>=energyToChild){
+                    if (animal1!=animal2 & animal1.getPosition().equals(animal2.getPosition()) & animal1.getEnergy()>=maxEnergy & animal2.getEnergy()>=maxEnergy){
                         childlist.add(child(animal1, animal2));
                         change=true;
                         updateTreeSet(animal1);
@@ -132,6 +127,25 @@ abstract public class WorldMap {
             geneSet.add(animal);
         }
     }
+    public void placeGrass(){
+        biomeType.placeGrass();
+        day+=1;
+    }
+
+    // PRZYDATNE GETY
+    public ArrayList<Animal> getAnimalList(){
+        return new ArrayList<Animal>(animalList);
+    }
+
+    public boolean[][] getPreferedFields(){
+        return biomeType.getPreferedFields();
+    }
+
+    public ArrayList<Grass> getGrassList(){
+        return biomeType.getGrassArray();
+    }
+
+    // POMOCNICZE FUNKCJE
     private Animal child(Animal animal1, Animal animal2){
         int mianownik = animal1.getEnergy()+animal2.getEnergy();
         int przeciecie = (int)(animal1.getEnergy()/mianownik);
@@ -179,10 +193,6 @@ abstract public class WorldMap {
         animal2.addEnergy(-energyToChild);
         return animal;
     }
-    public void placeGrass(){
-        biomeType.placeGrass();
-        day+=1;
-    }
     private void updateTreeSet(Animal animal){
         animalSet.remove(animal);
         animalSet.add(animal);
@@ -190,13 +200,13 @@ abstract public class WorldMap {
 
 
     // POBIERANIE RÓŻNYCH STATYSTYK
-    public int getLiveAnimalNum(){
+    public int getLiveAnimalNum(){ // liczba wszystkich zwierzat
         return animalList.size();
     }
-    public int getGrassNum(){
+    public int getGrassNum(){ // liczba wszystkich roślin
         return biomeType.getSize();
     }
-    public int freeFields(){
+    public int freeFields(){ // liczba wolnych pól
         boolean[][] free = new boolean[width][height];
         for (int i=0; i<width; i++){
             for (int j=0; j<height; j++){
@@ -219,7 +229,7 @@ abstract public class WorldMap {
         }
         return freefields;
     }
-    public int[] mostPopularGene(){
+    public int[] mostPopularGenes(){ // najbardziej popularny genotyp
         int idx=0;
         int maximum=0;
         int temp=1;
@@ -238,7 +248,7 @@ abstract public class WorldMap {
         }
         return ((Animal) genelist[idx]).getGenes();
     }
-    public int avgEnergy(){
+    public int avgEnergy(){ // średni poziom energii dla żyjących zwierząt
         if (animalList.size()==0){
             return 0;
         }
@@ -249,7 +259,7 @@ abstract public class WorldMap {
         eng=(int)(eng/animalList.size());
         return eng;
     }
-    public int avgLive(){
+    public int avgLive(){ // średnia długość życia zwierząt (dla tych martwych)
         if (deadAnimalList.size()==0){
             return 0;
         }

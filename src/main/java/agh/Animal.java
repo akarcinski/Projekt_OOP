@@ -9,6 +9,7 @@ public class Animal{
     private final int born;
     private int kids;
     private int death=-1;
+    private int eatenGrass=0;
     public Animal(Vector2d position, int energy, Direction direction, int[] genes, int idxGene, int born) {
         this.position = position;
         this.energy = energy;
@@ -53,9 +54,10 @@ public class Animal{
         this.energy += energy;
     }
 
-    public void move(Vector2d position, Direction direction){
+    public void move(Vector2d position, Direction direction, int move_energy){
         this.position=position;
         this.direction=direction;
+        this.energy-=move_energy;
     }
     public int nextMove(){
 //        idxGene++;
@@ -68,5 +70,13 @@ public class Animal{
 
     public int[] getGenes() {
         return genes;
+    }
+
+    public void addNumGrass(){
+        this.eatenGrass+=1;
+    }
+
+    public int getEatenGrass() {
+        return eatenGrass;
     }
 }
