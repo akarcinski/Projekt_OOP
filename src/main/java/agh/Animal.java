@@ -5,12 +5,36 @@ public class Animal{
     private int energy;
     protected Direction direction;
     protected int[] genes;
-    protected int idxGene = -1;
-    public Animal(Vector2d position, int energy, Direction direction, int[] genes) {
+    protected int idxGene;
+    private final int born;
+    private int kids;
+    private int death=-1;
+    public Animal(Vector2d position, int energy, Direction direction, int[] genes, int idxGene, int born) {
         this.position = position;
         this.energy = energy;
         this.direction = direction;
         this.genes = genes;
+        this.born=born;
+        this.idxGene=idxGene;
+        this.kids=0;
+    }
+
+    public int getDeath() {
+        return death;
+    }
+    public void setDeath(int death){
+        this.death=death;
+    }
+
+    public int getKids() {
+        return kids;
+    }
+    public void addKid(){
+        kids+=1;
+    }
+
+    public int getBorn() {
+        return born;
     }
 
     public Vector2d getPosition() {
@@ -42,5 +66,7 @@ public class Animal{
         this.direction=direction;
     }
 
-
+    public int[] getGenes() {
+        return genes;
+    }
 }

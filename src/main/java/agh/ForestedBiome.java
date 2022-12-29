@@ -11,12 +11,12 @@ public class ForestedBiome implements IBiomeType{
     private final Random rand=new Random();
     private ArrayList<Grass> grassArray = new ArrayList<>();
     private Map<Vector2d, Grass> hashmapa = new HashMap<>();
-    public ForestedBiome(int width, int height, int start_num, int stage_num){
+    public ForestedBiome(int width, int height, int start_num_grass, int stage_num_grass){
         this.width=width;
         this.height=height;
         this.low=(int) Math.round(height*0.4);
         this.high=(int) Math.round(height*0.6);
-        this.stage_num=stage_num;
+        this.stage_num=stage_num_grass;
         int placed_grass=0;
         int x,y;
         while (true){
@@ -41,7 +41,7 @@ public class ForestedBiome implements IBiomeType{
                     }
                 }
             }
-            if (placed_grass>=start_num | grassArray.size()==width*height) break;
+            if (placed_grass>=start_num_grass | grassArray.size()==width*height) break;
         }
     }
 
@@ -86,13 +86,22 @@ public class ForestedBiome implements IBiomeType{
     }
 
     @Override
-    public void eatGrass(Vector2d position) {
-        grassArray.remove(hashmapa.get(position));
-        hashmapa.remove(position);
+    public boolean eatGrass(Vector2d position) {
+        if (hashmapa.containsKey(position)) {
+            grassArray.remove(hashmapa.get(position));
+            hashmapa.remove(position);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void setDeath(Vector2d position) {
 
+    }
+
+    @Override
+    public int getSize() {
+        return grassArray.size();
     }
 }

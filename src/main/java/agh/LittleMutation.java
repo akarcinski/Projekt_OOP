@@ -10,12 +10,10 @@ public class LittleMutation implements IMutationType{
     }
 
     @Override
-    public void mutate(Animal animal) {
-        for (int i=0; i<lengthGene; i++){
-            if(rand.nextInt(2)<1){
-                animal.genes[i]=(animal.genes[i]-1)%8;
-            }
-            else animal.genes[i]=(animal.genes[i]+1)%8;
+    public void mutate(Animal animal, int index) {
+        if(rand.nextInt(2)<1){
+            animal.genes[index]=(animal.genes[index]-1)%8;
         }
+        else animal.genes[index]=(animal.genes[index]+1)%8;
     }
 }

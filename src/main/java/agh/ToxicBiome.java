@@ -34,7 +34,7 @@ public class ToxicBiome implements IBiomeType{
                     placed_grass+=1;
                 }
             }
-            if (placed_grass>=stage_num | grassArray.size()==width*height) break;
+            if (placed_grass>=start_num | grassArray.size()==width*height) break;
         }
     }
     private int getMinDeath(){
@@ -94,8 +94,17 @@ public class ToxicBiome implements IBiomeType{
     }
 
     @Override
-    public void eatGrass(Vector2d position) {
-        grassArray.remove(haszmapa.get(position));
-        haszmapa.remove(position);
+    public boolean eatGrass(Vector2d position) {
+        if (haszmapa.containsKey(position)){
+            grassArray.remove(haszmapa.get(position));
+            haszmapa.remove(position);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getSize() {
+        return grassArray.size();
     }
 }

@@ -10,9 +10,7 @@ public class FullMutation implements IMutationType{
     }
 
     @Override
-    public void mutate(Animal animal) {
-        for(int i=0; i<lengthGene; i++){
-            animal.genes[i]= rand.nextInt(8);
-        }
+    public void mutate(Animal animal, int index) {
+        animal.genes[index]= rand.nextInt(8);
     }
 }
