@@ -1,5 +1,3 @@
-package agh;
-
 public enum Direction {
     NN(0),
     NE(1),

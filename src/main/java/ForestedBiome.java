@@ -1,6 +1,3 @@
-package agh;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class ForestedBiome implements IBiomeType{

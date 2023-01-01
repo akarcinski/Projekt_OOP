@@ -1,5 +1,3 @@
-package agh;
-
 public class Earth implements IMapType{
     int width;
     int height;

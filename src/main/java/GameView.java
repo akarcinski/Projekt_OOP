@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import agh.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,7 +45,7 @@ public class GameView implements Initializable {
         setGrid();
         updateGrid();
         gvMap.setGridLinesVisible(true);
-        engine = new Engine(map);
+        engine = new Engine(map, this);
         //Thread game = new Thread(this.engine);
         //game.start();
 
@@ -75,27 +75,33 @@ public class GameView implements Initializable {
     }
 
     public void updateGrid() throws FileNotFoundException {
-        gvMap.getChildren().clear();
-        //gvMap.add(new Label("123"),0,0);
+        Platform.runLater(() -> {
+            gvMap.getChildren().clear();
+            //gvMap.add(new Label("123"),0,0);
 
-        for (int y=0; y < height; y++) {
-            for (int x=0; x<width; x++) {
-                VBox vBox = groundElement(pref[x][y]);
-                gvMap.add(vBox, x, y);
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    VBox vBox = null;
+                    try {
+                        vBox = groundElement(pref[x][y]);
+                    } catch (FileNotFoundException exception) {
+                        exception.printStackTrace();
+                    }
+                    gvMap.add(vBox, x, y);
+                }
             }
-        }
 
-        for (Grass grass : grasses) {
-            VBox vBox = grassElement(pref[grass.getPosition().getX()][grass.getPosition().getY()]);
-            gvMap.add(vBox, grass.getPosition().getX(), grass.getPosition().getY());
-        }
+            for (Grass grass : grasses) {
+                VBox vBox = grassElement(pref[grass.getPosition().getX()][grass.getPosition().getY()]);
+                gvMap.add(vBox, grass.getPosition().getX(), grass.getPosition().getY());
+            }
 
-        for (Animal animal : animals) {
-            VBox vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection());
-            gvMap.add(vBox, animal.getPosition().getX(), animal.getPosition().getY());
-            gvMap.styleProperty().set("");
-        }
-
+            for (Animal animal : animals) {
+                VBox vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection());
+                gvMap.add(vBox, animal.getPosition().getX(), animal.getPosition().getY());
+                gvMap.styleProperty().set("");
+            }
+        });
     }
 
     public VBox animalElement(Boolean type, Direction dir) {

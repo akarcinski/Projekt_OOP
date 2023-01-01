@@ -1,5 +1,3 @@
-package agh;
-
 import java.util.Random;
 
 public class LittleMutation implements IMutationType{

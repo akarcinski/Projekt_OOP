@@ -1,5 +1,3 @@
-package agh;
-
 public class NormalBehaviour implements IBehaviourType{
     public NormalBehaviour(){}
     @Override

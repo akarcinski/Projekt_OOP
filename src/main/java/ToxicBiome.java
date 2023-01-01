@@ -1,5 +1,3 @@
-package agh;
-
 import java.util.*;
 
 public class ToxicBiome implements IBiomeType{

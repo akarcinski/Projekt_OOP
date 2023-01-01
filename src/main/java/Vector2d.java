@@ -1,5 +1,3 @@
-package agh;
-
 import java.util.Objects;
 
 public class Vector2d {
