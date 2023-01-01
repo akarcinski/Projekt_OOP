@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.RecursiveTask;
 
-abstract public class WorldMap {
+public class WorldMap {
     private int width;
     private int height;
     private Node[][] map;
