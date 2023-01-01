@@ -33,13 +33,13 @@ agh/Direction.java
  agh.Direction$1
 agh/Grass.java
  agh.Grass
-Main.java
- Main
+agh/Earth.java
+ agh.Earth
 agh/SathanPortal.java
  agh.SathanPortal
 agh/IMapType.java
  agh.IMapType
 Controller.java
  Controller
-agh/Earth.java
- agh.Earth
+Main.java
+ Main

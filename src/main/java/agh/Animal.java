@@ -1,5 +1,8 @@
 package agh;
 
+import java.security.PublicKey;
+import java.util.ArrayList;
+
 public class Animal{
     protected Vector2d position;
     private int energy;
