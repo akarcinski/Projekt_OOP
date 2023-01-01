@@ -2,9 +2,9 @@ package agh;
 
 import javafx.application.Platform;
 
-public class engine implements Runnable{
+public class Engine implements Runnable{
     private WorldMap mapa;
-    public engine(WorldMap mapa){
+    public Engine(WorldMap mapa){
         this.mapa=mapa;
     }
 
@@ -18,6 +18,7 @@ public class engine implements Runnable{
             mapa.copulation();
             mapa.placeGrass();
             mapa.changeGenesAnimals();
+
             //Platform.runLater(); TUTAJ RÓWNIEŻ RYSOWANIE MAPY
         }
     }
