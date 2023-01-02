@@ -2,15 +2,15 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -47,7 +47,7 @@ public class GameView {
     private GridPane gvMap;
 
     @FXML
-    private Button gvStartBT;
+    public Button gvStartBT;
 
     private WorldMap map;
     private int width;
@@ -63,6 +63,18 @@ public class GameView {
     ArrayList<Grass> grasses;
     boolean[][] pref;
     Thread game;
+
+    @FXML
+    void btnClose(ActionEvent event){
+        engine.kill();
+        try {
+            Stage s = (Stage)gvStartBT.getScene().getWindow();
+            s.close();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void btnStart(ActionEvent event) throws FileNotFoundException, InterruptedException {
         if (gvStartBT.getText().equals("START")) {
@@ -78,23 +90,10 @@ public class GameView {
             System.out.println("stop");
             gvStartBT.setText("RESUME");
             engine.stop();
-//            synchronized (game){
-//                try {
-//                    game.wait();
-//                } catch (InterruptedException e){
-//                    e.printStackTrace();
-//                }
-//            }
-            //game.stop();
         }
         else {
             gvStartBT.setText("STOP");
-            engine.run();
-//            synchronized (game){
-//
-//                game.notifyAll();
-//            }
-            //game.notifyAll();
+            engine.start();
         }
 
     }
@@ -150,19 +149,23 @@ public class GameView {
             }
 
             for (Grass grass : grasses) {
+                if (grass == null)
+                    continue;
                 VBox vBox = grassElement(pref[grass.getPosition().getX()][grass.getPosition().getY()]);
                 gvMap.add(vBox, grass.getPosition().getX(), grass.getPosition().getY());
             }
 
             for (Animal animal : animals) {
-                VBox vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection());
+                if (animal==null)
+                    continue;
+                VBox vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection(), animal.getEnergy());
                 gvMap.add(vBox, animal.getPosition().getX(), animal.getPosition().getY());
-                gvMap.styleProperty().set("");
+                //gvMap.styleProperty().set("");
             }
         });
     }
 
-    public VBox animalElement(Boolean type, Direction dir) {
+    public VBox animalElement(Boolean type, Direction dir, int energy) {
         VBox vBox = new VBox();
         Image image = null;
         ImageView imageView;
@@ -213,10 +216,14 @@ public class GameView {
             return vBox;
         }
 
+        ProgressBar energyBar = new ProgressBar(0.5);
+        energyBar.setStyle("-fx-accent: green");
+        energyBar.setProgress(0.5);
         imageView = new ImageView(image);
-        imageView.setFitHeight(cellHeight);
-        imageView.setFitWidth(cellWidth);
-        vBox.getChildren().add(imageView);
+        imageView.setFitHeight(cellHeight-10);
+        imageView.setFitWidth(cellWidth-10);
+        vBox.setSpacing(5);
+        vBox.getChildren().addAll(imageView, energyBar);
         vBox.setAlignment(Pos.CENTER);
         return vBox;
     }

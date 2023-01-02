@@ -26,5 +26,6 @@
       <Label fx:id="gvDay" layoutX="19.0" layoutY="288.0" prefHeight="18.0" prefWidth="132.0" text="0" />
       <Label layoutX="19.0" layoutY="322.0" prefHeight="18.0" prefWidth="132.0" text="geny" />
       <Label fx:id="gvMostPopularGenes" layoutX="19.0" layoutY="346.0" prefHeight="18.0" prefWidth="132.0" text="0" />
+      <Button layoutX="748.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnClose" prefHeight="25.0" prefWidth="50.0" text="EXIT" />
    </children>
 </AnchorPane>

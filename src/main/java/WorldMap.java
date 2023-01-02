@@ -156,6 +156,7 @@ public class WorldMap {
         return biomeType.getGrassArray();
     }
     public int getDay(){return day;}
+    public int getMaxEnergy(){return maxEnergy;}
     // POMOCNICZE FUNKCJE
     private Animal child(Animal animal1, Animal animal2){
         int mianownik = animal1.getEnergy()+animal2.getEnergy();

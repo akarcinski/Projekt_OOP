@@ -8,17 +8,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
     @FXML
     private Button btnMainMenu;
+    @FXML
+    private Button ftbtnFileChooser;
     @FXML
     private TextField ftAnimalNum;
 
@@ -73,51 +77,78 @@ public class Controller implements Initializable {
     private String[] maps = {"ziemia", "pieklo"};
     private String[] biomes = {"jungle", "trupy"};
     private String[] behaviours = {"normalne", "szalone"};
+    private File f;
+    @FXML
+    void singleFileChoser(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        f = fileChooser.showOpenDialog(null);
+
+        if (f!=null) {
+            ftbtnFileChooser.setText("Selected:" + f.getAbsolutePath());
+        }
+    }
+
 
     @FXML
     void btnOnClicked(ActionEvent event) throws IOException {
-        int width;
-        int height;
-        int grassNum;       // startowa liczba roślin
-        int restoreEnergy;  // energia zapewniana przez zjedzenie jednej rośliny
-        int growingRate;    // liczba roślin wyrastająca każdego dnia
-        int animalNum;      // startowa liczba zwierzaków
-        int startEnergy;    // startowa energia zwierzaków
-        int maxEnergy;      // energia konieczna, by uznać zwierzaka za najedzonego
-        int energyToChild;   // energia rodziców zużywana by stworzyć potomka
-        int minMutation;     // minimalna liczba mutacji u potomków
-        int maxMutation;     // maksymalna liczba mutacji u potomków
-        int genomeLength;    // długość genomu zwierzaków
+        if (f!=null) {
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            StringBuffer sb = new StringBuffer();
+            String line;
+            while ((line = br.readLine()) !=null) {
+                String[] data = line.split(":");
+                System.out.println(data[1]);
+            }
 
-        IMapType mapType;            // typ mapy:        kula ziemska, piekielny portal
-        IBiomeType biomeType;        // typ zalesienia:  zalesione równiki, toksyczne trupy
-        IMutationType mutationType;  // typ mutacji:     pełna losowość, korekta
-        IBehaviourType behaviourType;// typ zachowania:  pełna predestynacja, nieco szaleństwa
 
-        width = Integer.parseInt(ftWidth.getText());
-        height = Integer.parseInt(ftHeight.getText());
-        grassNum = Integer.parseInt(ftGrassNum.getText());
-        restoreEnergy = Integer.parseInt(ftRestoreEnergy.getText());
-        growingRate = Integer.parseInt(ftGrowingRate.getText());
-        animalNum = Integer.parseInt(ftAnimalNum.getText());
-        startEnergy = Integer.parseInt(ftStartEnergy.getText());
-        maxEnergy = Integer.parseInt(ftMaxEnergy.getText());
-        energyToChild = Integer.parseInt(ftEnergyToChild.getText());
-        minMutation = Integer.parseInt(ftMinMutation.getText());
-        maxMutation = Integer.parseInt(ftMaxMutation.getText());
-        genomeLength = Integer.parseInt(ftGenomeLength.getText());
 
-        mapType = (ftMapType.getValue().equals(maps[0]) ? new Earth(width, height) : new SathanPortal(width, height, 3));
-        biomeType = (ftBiomeType.getValue().equals(biomes[0]) ? new ForestedBiome(width, height, grassNum, growingRate) :
-                new ToxicBiome(width, height, grassNum, growingRate));
-        mutationType = (ftMutationType.getValue().equals(mutations[0]) ? new LittleMutation(genomeLength) :
-                new FullMutation(genomeLength));
-        behaviourType = (ftBehaviourType.getValue().equals(behaviours[0]) ? new NormalBehaviour() : new CrazyBehaviour());
 
-        WorldMap worldMap = new WorldMap(width,height,grassNum,restoreEnergy,growingRate,animalNum,startEnergy,maxEnergy,
-                energyToChild,minMutation, maxMutation,genomeLength,mapType,biomeType,mutationType,behaviourType);
+        }
+            int width;
+            int height;
+            int grassNum;       // startowa liczba roślin
+            int restoreEnergy;  // energia zapewniana przez zjedzenie jednej rośliny
+            int growingRate;    // liczba roślin wyrastająca każdego dnia
+            int animalNum;      // startowa liczba zwierzaków
+            int startEnergy;    // startowa energia zwierzaków
+            int maxEnergy;      // energia konieczna, by uznać zwierzaka za najedzonego
+            int energyToChild;   // energia rodziców zużywana by stworzyć potomka
+            int minMutation;     // minimalna liczba mutacji u potomków
+            int maxMutation;     // maksymalna liczba mutacji u potomków
+            int genomeLength;    // długość genomu zwierzaków
 
-        long simulationSpeed = (long)ftSimulationSpeed.getValue();
+            IMapType mapType;            // typ mapy:        kula ziemska, piekielny portal
+            IBiomeType biomeType;        // typ zalesienia:  zalesione równiki, toksyczne trupy
+            IMutationType mutationType;  // typ mutacji:     pełna losowość, korekta
+            IBehaviourType behaviourType;// typ zachowania:  pełna predestynacja, nieco szaleństwa
+
+            width = Integer.parseInt(ftWidth.getText());
+            height = Integer.parseInt(ftHeight.getText());
+            grassNum = Integer.parseInt(ftGrassNum.getText());
+            restoreEnergy = Integer.parseInt(ftRestoreEnergy.getText());
+            growingRate = Integer.parseInt(ftGrowingRate.getText());
+            animalNum = Integer.parseInt(ftAnimalNum.getText());
+            startEnergy = Integer.parseInt(ftStartEnergy.getText());
+            maxEnergy = Integer.parseInt(ftMaxEnergy.getText());
+            energyToChild = Integer.parseInt(ftEnergyToChild.getText());
+            minMutation = Integer.parseInt(ftMinMutation.getText());
+            maxMutation = Integer.parseInt(ftMaxMutation.getText());
+            genomeLength = Integer.parseInt(ftGenomeLength.getText());
+
+            mapType = (ftMapType.getValue().equals(maps[0]) ? new Earth(width, height) : new SathanPortal(width, height, 3));
+            biomeType = (ftBiomeType.getValue().equals(biomes[0]) ? new ForestedBiome(width, height, grassNum, growingRate) :
+                    new ToxicBiome(width, height, grassNum, growingRate));
+            mutationType = (ftMutationType.getValue().equals(mutations[0]) ? new LittleMutation(genomeLength) :
+                    new FullMutation(genomeLength));
+            behaviourType = (ftBehaviourType.getValue().equals(behaviours[0]) ? new NormalBehaviour() : new CrazyBehaviour());
+
+
+            WorldMap worldMap = new WorldMap(width, height, grassNum, restoreEnergy, growingRate, animalNum, startEnergy, maxEnergy,
+                    energyToChild, minMutation, maxMutation, genomeLength, mapType, biomeType, mutationType, behaviourType);
+
+            long simulationSpeed = (long) ftSimulationSpeed.getValue();
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameView.fxml"));

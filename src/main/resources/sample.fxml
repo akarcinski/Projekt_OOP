@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Button fx:id="btnMainMenu" layoutX="202.0" layoutY="465.0" mnemonicParsing="false" onAction="#btnOnClicked" prefHeight="64.0" prefWidth="108.0" text="OK" />
+      <Button fx:id="btnMainMenu" layoutX="202.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnOnClicked" prefHeight="64.0" prefWidth="108.0" text="OK" />
       <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="134.0" text="width" textAlignment="RIGHT" />
       <TextField fx:id="ftWidth" layoutX="14.0" layoutY="32.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
       <Label alignment="CENTER" layoutX="14.0" layoutY="58.0" prefHeight="18.0" prefWidth="134.0" text="height" textAlignment="RIGHT" />
@@ -42,7 +42,8 @@
       <ChoiceBox fx:id="ftMutationType" layoutX="189.0" layoutY="208.0" prefHeight="26.0" prefWidth="134.0" />
       <Label alignment="CENTER" layoutX="189.0" layoutY="279.0" prefHeight="18.0" prefWidth="134.0" text="behaviourType" textAlignment="RIGHT" />
       <ChoiceBox fx:id="ftBehaviourType" layoutX="189.0" layoutY="297.0" prefHeight="26.0" prefWidth="134.0" />
-      <Slider fx:id="ftSimulationSpeed" blockIncrement="50.0" layoutX="189.0" layoutY="390.0" max="1000.0" min="1.0" minorTickCount="5" showTickMarks="true" snapToTicks="true" value="500.0" />
-      <Label alignment="CENTER" layoutX="189.0" layoutY="366.0" prefHeight="18.0" prefWidth="134.0" text="simulation speed" textAlignment="RIGHT" />
+      <Slider fx:id="ftSimulationSpeed" blockIncrement="50.0" layoutX="186.0" layoutY="363.0" majorTickUnit="50.0" max="1000.0" min="50.0" minorTickCount="25" showTickMarks="true" snapToTicks="true" value="525.0" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="344.0" prefHeight="18.0" prefWidth="134.0" text="simulation speed" textAlignment="RIGHT" />
+      <Button fx:id="ftbtnFileChooser" layoutX="202.0" layoutY="398.0" mnemonicParsing="false" onAction="#singleFileChoser" prefHeight="64.0" prefWidth="108.0" text="Select File" />
    </children>
 </AnchorPane>
