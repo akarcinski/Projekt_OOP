@@ -55,7 +55,7 @@ public class WorldMap {
 
             int[] genes=new int[genomeLength];
             for(int j=0; j<genomeLength; j++){
-                genes[j]=rand.nextInt()%8;
+                genes[j]=rand.nextInt(8);
             }
             Animal animal = new Animal(new Vector2d(x,y), maxEnergy, Direction.values[rand.nextInt(8)], genes,0, day);
             this.animalList.add(animal);
@@ -66,14 +66,21 @@ public class WorldMap {
 
     // DO SIMULATION ENGINE
     public void cleanMap(){ // czysci plansze z martwych zwierzat
-        for(Animal animal: animalList){
-            if (animal.getEnergy()<=0){
-                biomeType.setDeath(animal.getPosition());
-                animalList.remove(animal);
-                animalSet.remove(animal);
-                deadAnimalList.add(animal);
+        boolean clean=true;
+        while (clean) {
+            clean=false;
+            for (Animal animal : animalList) {
+                if (animal.getEnergy() <= 0) {
+                    clean=true;
+                    biomeType.setDeath(animal.getPosition());
+                    animalList.remove(animal);
+                    animalSet.remove(animal);
+                    deadAnimalList.add(animal);
+                    break;
+                }
             }
         }
+        biomeType.update();
     }
     public void changeGenesAnimals(){ // kolejnosc wykonywania genow zaleznie od zachowania jakie jest przyjete (używać na samym koncu iteracji)
         for (Animal animal: animalList){
@@ -87,13 +94,19 @@ public class WorldMap {
         }
     }
     public void consumption(){ // zwierzeta sobie jedza
-        for (Animal animal: animalSet){
-            if (animal.getEnergy()<maxEnergy) {
-                if (biomeType.eatGrass(animal.getPosition())) {
-                    animal.addEnergy(restoreEnergy);
-                    animal.addNumGrass();
-                    updateTreeSet(animal);
+        boolean zmiana=true;
+        while(zmiana) {
+            zmiana=false;
+            for (Animal animal : animalSet) {
+                if (animal.getEnergy() < maxEnergy) {
+                    if (biomeType.eatGrass(animal.getPosition())) {
+                        zmiana=true;
+                        animal.addEnergy(restoreEnergy);
+                        animal.addNumGrass();
+                        updateTreeSet(animal);
+                    }
                 }
+                if (zmiana) break;
             }
         }
     }
@@ -130,7 +143,7 @@ public class WorldMap {
 
     // PRZYDATNE GETY
     public ArrayList<Animal> getAnimalList(){
-        return new ArrayList<Animal>(animalList);
+        return animalList;
     }
 
     public boolean[][] getPreferedFields(){

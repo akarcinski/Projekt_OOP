@@ -86,17 +86,18 @@ public class ToxicBiome implements IBiomeType{
 
     @Override
     public boolean[][] getPreferedFields() {
-        int mindeath=getMinDeath();
-        for (int i=0; i<width; i++){
-            for (int j=0; j<height; j++){
-                this.preferedFields[i][j]= (deathArray[i][j] == mindeath);
-            }
-        }
-        boolean[][] copy = new boolean[width][];
-        for (int i=0; i<width; i++){
-            copy[i]=preferedFields[i].clone();
-        }
-        return copy;
+//        int mindeath=getMinDeath();
+//        for (int i=0; i<width; i++){
+//            for (int j=0; j<height; j++){
+//                this.preferedFields[i][j]= (deathArray[i][j] == mindeath);
+//            }
+//        }
+//        boolean[][] copy = new boolean[width][];
+//        for (int i=0; i<width; i++){
+//            copy[i]=preferedFields[i].clone();
+//        }
+//        return copy;
+        return preferedFields;
     }
 
     @Override
@@ -105,7 +106,7 @@ public class ToxicBiome implements IBiomeType{
     }
     @Override
     public ArrayList<Grass> getGrassArray() {
-        return new ArrayList<>(grassArray);
+        return grassArray;
     }
 
     @Override
@@ -126,5 +127,15 @@ public class ToxicBiome implements IBiomeType{
     @Override
     public int getSize() {
         return grassArray.size();
+    }
+
+    @Override
+    public void update() {
+        int mindeath=getMinDeath();
+        for (int i=0; i<width; i++){
+            for (int j=0; j<height; j++){
+                this.preferedFields[i][j] = (deathArray[i][j] == mindeath);
+            }
+        }
     }
 }

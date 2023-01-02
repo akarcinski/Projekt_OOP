@@ -9,4 +9,5 @@ public interface IBiomeType {
     public void setDeath(Vector2d position);
     public int getSize();
     public boolean[][] getPreferedFields();
+    public void update();
 }
