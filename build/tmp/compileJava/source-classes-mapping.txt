@@ -29,20 +29,20 @@ Direction.java
  Direction$1
 Main.java
  Main
-GameView.java
- GameView
- GameView$1
+ForestedBiome.java
+ ForestedBiome
 IBiomeType.java
  IBiomeType
 ToxicBiome.java
  ToxicBiome
-ForestedBiome.java
- ForestedBiome
-Engine.java
- Engine
+Controller.java
+ Controller
 WorldMap.java
  AnimalComparator
  GeneComparator
  WorldMap
-Controller.java
- Controller
+GameView.java
+ GameView
+ GameView$1
+Engine.java
+ Engine
