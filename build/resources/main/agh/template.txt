@@ -1,0 +1,17 @@
+width:
+height:
+grassNum:
+restoreEnergy:
+growingRate:
+animalNum:
+startEnergy:
+maxEnergy:
+energyToChild:
+minMutation:
+maxMutation:
+genomeLength:
+mapType:
+biomeType:
+mutationType:
+behaviourType:
+simulationSpeed:
