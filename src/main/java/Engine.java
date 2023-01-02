@@ -16,6 +16,7 @@ public class Engine implements Runnable{
         terminate = false;
     }
 
+
     @Override
     public void run() {
         //Platform.runLater(); TUTAJ RYSOWANIE MAPY

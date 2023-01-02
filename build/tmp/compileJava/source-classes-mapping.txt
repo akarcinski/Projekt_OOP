@@ -1,21 +1,23 @@
 Vector2d.java
  Vector2d
-Grass.java
- Grass
+SathanPortal.java
+ SathanPortal
 Earth.java
  Earth
 CrazyBehaviour.java
  CrazyBehaviour
-FullMutation.java
- FullMutation
+ToxicBiome.java
+ ToxicBiome
 IMapType.java
  IMapType
 IBehaviourType.java
  IBehaviourType
 Animal.java
  Animal
-SathanPortal.java
- SathanPortal
+WorldMap.java
+ AnimalComparator
+ GeneComparator
+ WorldMap
 LittleMutation.java
  LittleMutation
 IMutationType.java
@@ -24,25 +26,23 @@ Node.java
  Node
 NormalBehaviour.java
  NormalBehaviour
+IBiomeType.java
+ IBiomeType
+Main.java
+ Main
+FullMutation.java
+ FullMutation
 Direction.java
  Direction
  Direction$1
-Main.java
- Main
 ForestedBiome.java
  ForestedBiome
-IBiomeType.java
- IBiomeType
-ToxicBiome.java
- ToxicBiome
-Controller.java
- Controller
-WorldMap.java
- AnimalComparator
- GeneComparator
- WorldMap
+Grass.java
+ Grass
 GameView.java
  GameView
  GameView$1
 Engine.java
  Engine
+Controller.java
+ Controller

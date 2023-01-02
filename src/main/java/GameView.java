@@ -98,10 +98,6 @@ public class GameView {
 
     }
 
-    public void closeWindowEvent(){
-        System.out.println("closing");
-    }
-
     public void receiveData(WorldMap map, int width, int height, long speed) {
         this.map = map;
         this.width = width;
@@ -173,42 +169,26 @@ public class GameView {
         try {
             if (type) {
                 switch (dir) {
-                    case NN -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal0Jungle.png"));}
-                    case NE -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal1Jungle.png"));}
-                    case EE -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal2Jungle.png"));}
-                    case SE -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal3Jungle.png"));}
-                    case SS -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal4Jungle.png"));}
-                    case SW -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal5Jungle.png"));}
-                    case WW -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal6Jungle.png"));}
-                    case NW -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal7Jungle.png"));}
+                    case NN -> image = new Image(new FileInputStream("src/main/resources/animal0Jungle.png"));
+                    case NE -> image = new Image(new FileInputStream("src/main/resources/animal1Jungle.png"));
+                    case EE -> image = new Image(new FileInputStream("src/main/resources/animal2Jungle.png"));
+                    case SE -> image = new Image(new FileInputStream("src/main/resources/animal3Jungle.png"));
+                    case SS -> image = new Image(new FileInputStream("src/main/resources/animal4Jungle.png"));
+                    case SW -> image = new Image(new FileInputStream("src/main/resources/animal5Jungle.png"));
+                    case WW -> image = new Image(new FileInputStream("src/main/resources/animal6Jungle.png"));
+                    case NW -> image = new Image(new FileInputStream("src/main/resources/animal7Jungle.png"));
                 }
             }
             else {
                 switch (dir) {
-                    case NN -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal0Steppe.png"));}
-                    case NE -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal1Steppe.png"));}
-                    case EE -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal2Steppe.png"));}
-                    case SE -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal3Steppe.png"));}
-                    case SS -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal4Steppe.png"));}
-                    case SW -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal5Steppe.png"));}
-                    case WW -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal6Steppe.png"));}
-                    case NW -> {
-                        image = new Image(new FileInputStream("src/main/resources/animal7Steppe.png"));}
+                    case NN -> image = new Image(new FileInputStream("src/main/resources/animal0Steppe.png"));
+                    case NE -> image = new Image(new FileInputStream("src/main/resources/animal1Steppe.png"));
+                    case EE -> image = new Image(new FileInputStream("src/main/resources/animal2Steppe.png"));
+                    case SE -> image = new Image(new FileInputStream("src/main/resources/animal3Steppe.png"));
+                    case SS -> image = new Image(new FileInputStream("src/main/resources/animal4Steppe.png"));
+                    case SW -> image = new Image(new FileInputStream("src/main/resources/animal5Steppe.png"));
+                    case WW -> image = new Image(new FileInputStream("src/main/resources/animal6Steppe.png"));
+                    case NW -> image = new Image(new FileInputStream("src/main/resources/animal7Steppe.png"));
                 }
             }
         } catch (FileNotFoundException e) {
