@@ -39,10 +39,10 @@ ForestedBiome.java
  ForestedBiome
 Grass.java
  Grass
+Controller.java
+ Controller
 GameView.java
  GameView
  GameView$1
 Engine.java
  Engine
-Controller.java
- Controller

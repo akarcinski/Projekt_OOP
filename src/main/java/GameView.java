@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class GameView implements Initializable {
+public class GameView {
 
     @FXML
     private GridPane gvMap;
@@ -43,11 +43,11 @@ public class GameView implements Initializable {
     void btnStart(ActionEvent event) throws FileNotFoundException {
         gvStartBT.setVisible(false);
         setGrid();
-        updateGrid();
+        //updateGrid();
         gvMap.setGridLinesVisible(true);
         engine = new Engine(map, this);
-        //Thread game = new Thread(this.engine);
-        //game.start();
+        Thread game = new Thread(this.engine);
+        game.start();
 
         //gvMap.add(new Label("y/x"), 0, 0);
         Stage mainWindow = (Stage) gvMap.getScene().getWindow();
@@ -207,10 +207,5 @@ public class GameView implements Initializable {
         vBox.getChildren().add(imageView);
         vBox.setAlignment(Pos.CENTER);
         return vBox;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
