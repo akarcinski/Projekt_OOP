@@ -29,7 +29,7 @@ public class Engine implements Runnable{
                 mapa.copulation();
                 mapa.placeGrass();
                 mapa.changeGenesAnimals();
-
+                System.out.println("liczba fields "+mapa.freeFields());
                 Thread.sleep(speed);
 
             }

@@ -1,7 +1,8 @@
 Vector2d.java
  Vector2d
-SathanPortal.java
- SathanPortal
+GameView.java
+ GameView
+ GameView$1
 Earth.java
  Earth
 CrazyBehaviour.java
@@ -14,8 +15,10 @@ IBehaviourType.java
  IBehaviourType
 Animal.java
  Animal
-Grass.java
- Grass
+WorldMap.java
+ AnimalComparator
+ GeneComparator
+ WorldMap
 LittleMutation.java
  LittleMutation
 IMutationType.java
@@ -35,13 +38,10 @@ Direction.java
  Direction$1
 ForestedBiome.java
  ForestedBiome
-WorldMap.java
- AnimalComparator
- GeneComparator
- WorldMap
-GameView.java
- GameView
- GameView$1
+Grass.java
+ Grass
+SathanPortal.java
+ SathanPortal
 Engine.java
  Engine
 Controller.java

@@ -73,6 +73,7 @@ public class WorldMap {
                 if (animal.getEnergy() <= 0) {
                     clean=true;
                     biomeType.setDeath(animal.getPosition());
+                    animal.setDeath(day);
                     animalList.remove(animal);
                     animalSet.remove(animal);
                     deadAnimalList.add(animal);
