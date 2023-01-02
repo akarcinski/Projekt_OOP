@@ -22,7 +22,6 @@ public class Engine implements Runnable{
                 mapa.copulation();
                 mapa.placeGrass();
                 mapa.changeGenesAnimals();
-
                 Thread.sleep(500);
 
             }

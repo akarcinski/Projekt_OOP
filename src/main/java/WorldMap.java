@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class WorldMap {
@@ -73,6 +76,7 @@ public class WorldMap {
                 if (animal.getEnergy() <= 0) {
                     clean=true;
                     biomeType.setDeath(animal.getPosition());
+                    animal.setDeath(day);
                     animalList.remove(animal);
                     animalSet.remove(animal);
                     deadAnimalList.add(animal);
@@ -153,6 +157,16 @@ public class WorldMap {
     public ArrayList<Grass> getGrassList(){
         return biomeType.getGrassArray();
     }
+//    public void csv_statistics(String path) throws IOException {
+//        CSVReader reader = new CSVReader(new FileReader("old.csv"));
+//        CSVWriter writer = new CSVWriter(new FileWriter("new.csv"));
+//        String [] nextLine;
+//        while ((nextLine = reader.readNext()) != null) {
+//            List<String> lineAsList = new ArrayList<String>(Arrays.asList(nextLine));
+//            // Add stuff using linesAsList.add(index, newValue) as many times as you need.
+//            writer.writeNext(lineAsList.toArray());
+//        }
+//    }
 
     // POMOCNICZE FUNKCJE
     private Animal child(Animal animal1, Animal animal2){
