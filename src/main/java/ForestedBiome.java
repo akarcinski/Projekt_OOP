@@ -126,6 +126,10 @@ public class ForestedBiome implements IBiomeType{
 
     @Override
     public void update() {
+    }
 
+    @Override
+    public ArrayList<Grass> getNewGrassArray() {
+        return new ArrayList<>(grassArray);
     }
 }

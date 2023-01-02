@@ -10,4 +10,5 @@ public interface IBiomeType {
     public int getSize();
     public boolean[][] getPreferedFields();
     public void update();
+    public ArrayList<Grass> getNewGrassArray();
 }

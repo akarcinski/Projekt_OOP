@@ -62,6 +62,7 @@ public class WorldMap {
             this.animalSet.add(animal);
             this.geneSet.add(animal);
         }
+        this.grassList=this.biomeType.getGrassArray();
     }
 
     // DO SIMULATION ENGINE
@@ -226,8 +227,10 @@ public class WorldMap {
         for (Animal animal: animalList){
             free[animal.getPosition().getX()][animal.getPosition().getY()]=false;
         }
-        for (Grass grass: biomeType.getGrassArray()){
-            free[grass.getPosition().getX()][grass.getPosition().getY()]=false;
+        if (grassList.size()>0) {
+            for (Grass grass : biomeType.getNewGrassArray()) {
+                free[grass.getPosition().getX()][grass.getPosition().getY()] = false;
+            }
         }
         int freefields=0;
         for (int i=0; i<width; i++){

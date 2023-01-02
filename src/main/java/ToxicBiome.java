@@ -138,4 +138,9 @@ public class ToxicBiome implements IBiomeType{
             }
         }
     }
+
+    @Override
+    public ArrayList<Grass> getNewGrassArray() {
+        return new ArrayList<>(grassArray);
+    }
 }
