@@ -1,0 +1,17 @@
+width:10
+height:10
+grassNum:10
+restoreEnergy:10
+growingRate:10
+animalNum:10
+startEnergy:10
+maxEnergy:10
+energyToChild:10
+minMutation:10
+maxMutation:10
+genomeLength:10
+mapType:0
+biomeType:0
+mutationType:0
+behaviourType:0
+simulationSpeed:500
