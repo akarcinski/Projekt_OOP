@@ -3,21 +3,28 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameView">
+<AnchorPane prefHeight="644.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameView">
    <children>
+      <Label fx:id="gvAvgEnergy" layoutX="19.0" layoutY="201.0" prefHeight="18.0" prefWidth="132.0" text="0" />
       <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="0.0" prefWidth="37.0" text="GRA" />
-      <GridPane fx:id="gvMap" layoutX="51.0" layoutY="50.0" prefHeight="500.0" prefWidth="700.0">
-        <columnConstraints>
+      <GridPane fx:id="gvMap" layoutX="160.0" layoutY="14.0" prefHeight="500.0" prefWidth="700.0">
 
-        </columnConstraints>
-        <rowConstraints>
-
-        </rowConstraints>
       </GridPane>
-      <Button fx:id="gvStartBT" layoutX="736.0" layoutY="561.0" mnemonicParsing="false" onAction="#btnStart" text="START" />
+      <Button fx:id="gvStartBT" layoutX="809.0" layoutY="604.0" mnemonicParsing="false" onAction="#btnStart" text="START" />
+      <Label layoutX="19.0" layoutY="51.0" prefHeight="18.0" prefWidth="132.0" text="Liczba żywych zwierząt" />
+      <Label fx:id="gvLiveAnimalNum" layoutX="19.0" layoutY="75.0" prefHeight="18.0" prefWidth="132.0" text="0" />
+      <Label layoutX="19.0" layoutY="93.0" prefHeight="18.0" prefWidth="132.0" text="Liczba traw" />
+      <Label fx:id="gvGrassNum" layoutX="19.0" layoutY="117.0" prefHeight="18.0" prefWidth="132.0" text="0" />
+      <Label layoutX="19.0" layoutY="135.0" prefHeight="18.0" prefWidth="132.0" text="Liczba wolnych pól" />
+      <Label fx:id="gvFreeFields" layoutX="19.0" layoutY="159.0" prefHeight="18.0" prefWidth="132.0" text="0" />
+      <Label layoutX="19.0" layoutY="177.0" prefHeight="18.0" prefWidth="132.0" text="Średnia energia" />
+      <Label layoutX="19.0" layoutY="219.0" prefHeight="18.0" prefWidth="132.0" text="Średnia długość życia" />
+      <Label fx:id="gvAvgLive" layoutX="19.0" layoutY="243.0" prefHeight="18.0" prefWidth="132.0" text="0" />
+      <Label layoutX="19.0" layoutY="264.0" prefHeight="18.0" prefWidth="132.0" text="liczba dni" />
+      <Label fx:id="gvDay" layoutX="19.0" layoutY="288.0" prefHeight="18.0" prefWidth="132.0" text="0" />
+      <Label layoutX="19.0" layoutY="322.0" prefHeight="18.0" prefWidth="132.0" text="geny" />
+      <Label fx:id="gvMostPopularGenes" layoutX="19.0" layoutY="346.0" prefHeight="18.0" prefWidth="132.0" text="0" />
    </children>
 </AnchorPane>
