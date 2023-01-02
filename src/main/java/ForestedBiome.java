@@ -74,7 +74,7 @@ public class ForestedBiome implements IBiomeType{
             Vector2d pozycja = new Vector2d(x,y);
             if (!hashmapa.containsKey(pozycja)){
                 if (y<low | y>high){
-                    if (rand.nextInt(10)<8){
+                    if (rand.nextInt(10)<2){
                         Grass trawa = new Grass(pozycja);
                         grassArray.add(trawa);
                         hashmapa.put(pozycja, trawa);
@@ -82,7 +82,7 @@ public class ForestedBiome implements IBiomeType{
                     }
                 }
                 else {
-                    if (rand.nextInt(10)<2){
+                    if (rand.nextInt(10)<8){
                         Grass trawa = new Grass(pozycja);
                         grassArray.add(trawa);
                         hashmapa.put(pozycja, trawa);

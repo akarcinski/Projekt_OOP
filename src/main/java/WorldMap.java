@@ -217,22 +217,23 @@ public class WorldMap {
     public int getGrassNum(){ // liczba wszystkich roślin
         return biomeType.getSize();
     }
-    public int freeFields(){ // liczba wolnych pól
+    public Integer freeFields() throws ConcurrentModificationException, NullPointerException{ // liczba wolnych pól
         boolean[][] free = new boolean[width][height];
         for (int i=0; i<width; i++){
             for (int j=0; j<height; j++){
                 free[i][j]=true;
             }
         }
+//        ArrayList<Animal> animals = (ArrayList<Animal>) animalList.clone();
         for (Animal animal: animalList){
             free[animal.getPosition().getX()][animal.getPosition().getY()]=false;
         }
         if (grassList.size()>0) {
-            for (Grass grass : biomeType.getNewGrassArray()) {
+            for (Grass grass : grassList) {
                 free[grass.getPosition().getX()][grass.getPosition().getY()] = false;
             }
         }
-        int freefields=0;
+        Integer freefields=0;
         for (int i=0; i<width; i++){
             for (int j=0; j<height; j++){
                 if (free[i][j]){
@@ -242,7 +243,7 @@ public class WorldMap {
         }
         return freefields;
     }
-    public int[] mostPopularGenes(){ // najbardziej popularny genotyp
+    public int[] mostPopularGenes() throws NullPointerException, ConcurrentModificationException{ // najbardziej popularny genotyp
         int idx=0;
         int maximum=0;
         int temp=1;
@@ -266,10 +267,11 @@ public class WorldMap {
             return 0;
         }
         int eng=0;
-        for (Animal animal: animalList){
+        ArrayList<Animal> animals = new ArrayList<>(animalList);
+        for (Animal animal: animals){
             eng+=animal.getEnergy();
         }
-        eng=(int)(eng/animalList.size());
+        eng=(int)(eng/animals.size());
         return eng;
     }
     public int avgLive(){ // średnia długość życia zwierząt (dla tych martwych)
@@ -282,6 +284,15 @@ public class WorldMap {
         }
         age=(int)(age/deadAnimalList.size());
         return age;
+    }
+    public String getStatistics(){
+        Integer liczbaZwierzat = getLiveAnimalNum();
+        Integer liczbaTraw = getGrassNum();
+        Integer liczbaWP = freeFields();
+        int[] geny = mostPopularGenes();
+        int eng = avgEnergy();
+        int live = avgLive();
+        return liczbaZwierzat.toString() + ", " + liczbaTraw.toString() + ", " + liczbaWP.toString() + ", " + geny.toString() + ", " + eng + ", " + live;
     }
 
 }

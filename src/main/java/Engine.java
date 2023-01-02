@@ -1,4 +1,5 @@
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.Arrays;
 
 public class Engine implements Runnable{
     private WorldMap mapa;
@@ -17,27 +18,40 @@ public class Engine implements Runnable{
         //Platform.runLater(); TUTAJ RYSOWANIE MAPY
         flag = false;
         System.out.println("dziala");
-        try{
+        try {
+            File file = new File("statistics.csv");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            PrintWriter pw = new PrintWriter(file);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        try{
             while (mapa.getAnimalList().size() > 0) {
+                pw.append(mapa.getLiveAnimalNum() + ", " + mapa.getGrassNum() + ", " + mapa.freeFields() + ", " + Arrays.toString(mapa.mostPopularGenes()) + ", " + mapa.avgEnergy() + ", " + mapa.avgLive());
+                pw.flush();
                 if(flag)
                     break;
                 System.out.println("dziala");
-                gameView.updateGrid();
                 mapa.cleanMap();
                 mapa.moveAnimals();
                 mapa.consumption();
                 mapa.copulation();
                 mapa.placeGrass();
                 mapa.changeGenesAnimals();
-                System.out.println("liczba fields "+mapa.freeFields());
+                gameView.updateGrid();
                 Thread.sleep(speed);
 
             }
+            pw.close();
 
 
             //Platform.runLater(); TUTAJ RÓWNIEŻ RYSOWANIE MAPY
         }catch(InterruptedException | FileNotFoundException interruptedException) {
             interruptedException.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
