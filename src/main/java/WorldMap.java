@@ -153,7 +153,7 @@ public class WorldMap {
     public ArrayList<Grass> getGrassList(){
         return biomeType.getGrassArray();
     }
-
+    public int getDay(){return day;}
     // POMOCNICZE FUNKCJE
     private Animal child(Animal animal1, Animal animal2){
         int mianownik = animal1.getEnergy()+animal2.getEnergy();

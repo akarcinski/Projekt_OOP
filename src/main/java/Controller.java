@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,6 +66,8 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField ftWidth;
+    @FXML
+    private Slider ftSimulationSpeed;
 
     private String[] mutations = {"lekka", "calkowita"};
     private String[] maps = {"ziemia", "pieklo"};
@@ -113,16 +117,20 @@ public class Controller implements Initializable {
         WorldMap worldMap = new WorldMap(width,height,grassNum,restoreEnergy,growingRate,animalNum,startEnergy,maxEnergy,
                 energyToChild,minMutation, maxMutation,genomeLength,mapType,biomeType,mutationType,behaviourType);
 
+        long simulationSpeed = (long)ftSimulationSpeed.getValue();
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameView.fxml"));
         Parent root1 = fxmlLoader.load();
 
         GameView gameViewController = fxmlLoader.getController();
-        gameViewController.receiveData(worldMap, width, height);
+        gameViewController.receiveData(worldMap, width, height, simulationSpeed);
 
         Stage gameView = new Stage();
         gameView.setTitle("Symulacja");
         gameView.setScene(new Scene(root1));
         gameView.show();
+        //gameView.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, gameView.getOnCloseRequest());
     }
 
     @Override

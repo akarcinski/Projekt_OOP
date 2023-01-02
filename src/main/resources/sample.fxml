@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -41,5 +42,7 @@
       <ChoiceBox fx:id="ftMutationType" layoutX="189.0" layoutY="208.0" prefHeight="26.0" prefWidth="134.0" />
       <Label alignment="CENTER" layoutX="189.0" layoutY="279.0" prefHeight="18.0" prefWidth="134.0" text="behaviourType" textAlignment="RIGHT" />
       <ChoiceBox fx:id="ftBehaviourType" layoutX="189.0" layoutY="297.0" prefHeight="26.0" prefWidth="134.0" />
+      <Slider fx:id="ftSimulationSpeed" blockIncrement="50.0" layoutX="189.0" layoutY="390.0" max="1000.0" min="1.0" minorTickCount="5" showTickMarks="true" snapToTicks="true" value="500.0" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="366.0" prefHeight="18.0" prefWidth="134.0" text="simulation speed" textAlignment="RIGHT" />
    </children>
 </AnchorPane>
