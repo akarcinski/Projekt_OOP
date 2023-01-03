@@ -1,7 +1,7 @@
 Vector2d.java
  Vector2d
-SathanPortal.java
- SathanPortal
+Controller.java
+ Controller
 Earth.java
  Earth
 CrazyBehaviour.java
@@ -39,10 +39,10 @@ ForestedBiome.java
  ForestedBiome
 Grass.java
  Grass
+SathanPortal.java
+ SathanPortal
 GameView.java
  GameView
  GameView$1
 Engine.java
  Engine
-Controller.java
- Controller
