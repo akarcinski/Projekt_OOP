@@ -77,6 +77,7 @@ public class GameView {
     private final double gridWidth = 700.0;
     private double cellWidth;
     private double cellHeight;
+    private boolean save;
     ArrayList<Animal> animals;
     ArrayList<Grass> grasses;
     boolean[][] pref;
@@ -108,16 +109,29 @@ public class GameView {
     }
 
     private boolean showing=false;
-
+    private boolean tmp= false;
     @FXML
     void gvShowWithGenome(ActionEvent event) throws FileNotFoundException {
-        showing = !showing;
-        updateGrid();
+        if (tmp) {
+            showing = !showing;
+            updateGrid();
+        }
     }
 
     @FXML
     void gvUnselect(ActionEvent event) {
         selected = null;
+        gvActGenome.setText("nothing");
+        gvActiveGenome.setText("0");
+        gvActEnergy.setText("0");
+        gvChildrens.setText("0");
+
+
+        gvDeathDay.setText("0");
+
+        gvEatenGrasses.setText("0");
+
+        gvAliveDays.setText("0");
     }
 
     @FXML
@@ -134,6 +148,7 @@ public class GameView {
 
     @FXML
     void btnStart(ActionEvent event) throws FileNotFoundException, InterruptedException {
+        tmp = true;
         if (gvStartBT.getText().equals("START")) {
             System.out.println("start");
             selected = null;
@@ -141,7 +156,7 @@ public class GameView {
             setGrid();
             //updateGrid();
             gvMap.setGridLinesVisible(true);
-            engine = new Engine(map, this, speed);
+            engine = new Engine(map, this, speed, save);
             game = new Thread(this.engine);
             game.start();
         }
@@ -158,12 +173,12 @@ public class GameView {
 
     }
 
-    public void receiveData(WorldMap map, int width, int height, long speed) {
+    public void receiveData(WorldMap map, int width, int height, long speed, boolean save) {
         this.map = map;
         this.width = width;
         this.height = height;
         this.speed = speed;
-
+        this.save = save;
         animals = this.map.getAnimalList();
         grasses = this.map.getGrassList();
         pref = this.map.getPreferedFields();

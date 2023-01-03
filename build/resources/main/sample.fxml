@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
@@ -10,41 +11,42 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <Button fx:id="btnMainMenu" layoutX="260.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnOnClicked" prefHeight="64.0" prefWidth="50.0" text="OK" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="134.0" text="width" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="134.0" text="szerokosc" textAlignment="RIGHT" />
       <TextField fx:id="ftWidth" layoutX="14.0" layoutY="32.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="58.0" prefHeight="18.0" prefWidth="134.0" text="height" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="58.0" prefHeight="18.0" prefWidth="134.0" text="wysokosc" textAlignment="RIGHT" />
       <TextField fx:id="ftHeight" layoutX="14.0" layoutY="76.0" prefHeight="26.0" prefWidth="134.0" promptText="height" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="102.0" prefHeight="18.0" prefWidth="134.0" text="grassNum" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="102.0" prefHeight="18.0" prefWidth="134.0" text="poczatkowa liczba traw" textAlignment="RIGHT" />
       <TextField fx:id="ftGrassNum" layoutX="14.0" layoutY="120.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="146.0" prefHeight="18.0" prefWidth="134.0" text="restoreEnergy" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="146.0" prefHeight="18.0" prefWidth="134.0" text="energia za rosline" textAlignment="RIGHT" />
       <TextField fx:id="ftRestoreEnergy" layoutX="14.0" layoutY="164.0" prefHeight="26.0" prefWidth="134.0" promptText="height" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="190.0" prefHeight="18.0" prefWidth="134.0" text="growingRate" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="190.0" prefHeight="18.0" prefWidth="134.0" text="wzrost traw na dzien" textAlignment="RIGHT" />
       <TextField fx:id="ftGrowingRate" layoutX="14.0" layoutY="208.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="234.0" prefHeight="18.0" prefWidth="134.0" text="animalNum" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="234.0" prefHeight="18.0" prefWidth="146.0" text="poczatkowa liczba zwierzat" textAlignment="RIGHT" />
       <TextField fx:id="ftAnimalNum" layoutX="14.0" layoutY="252.0" prefHeight="26.0" prefWidth="134.0" promptText="height" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="278.0" prefHeight="18.0" prefWidth="134.0" text="startEnergy" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="278.0" prefHeight="18.0" prefWidth="134.0" text="poczatkowa energia" textAlignment="RIGHT" />
       <TextField fx:id="ftStartEnergy" layoutX="14.0" layoutY="296.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="322.0" prefHeight="18.0" prefWidth="134.0" text="maxEnergy" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="322.0" prefHeight="18.0" prefWidth="134.0" text="maksymalna energia" textAlignment="RIGHT" />
       <TextField fx:id="ftMaxEnergy" layoutX="14.0" layoutY="340.0" prefHeight="26.0" prefWidth="134.0" promptText="height" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="366.0" prefHeight="18.0" prefWidth="134.0" text="energyToChild" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="-1.0" layoutY="366.0" prefHeight="18.0" prefWidth="169.0" text="energia potrzebna na dziecko" textAlignment="RIGHT" />
       <TextField fx:id="ftEnergyToChild" layoutX="14.0" layoutY="384.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="410.0" prefHeight="18.0" prefWidth="134.0" text="minMutation" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="410.0" prefHeight="18.0" prefWidth="134.0" text="minimalna liczba mutacji" textAlignment="RIGHT" />
       <TextField fx:id="ftMinMutation" layoutX="14.0" layoutY="428.0" prefHeight="26.0" prefWidth="134.0" promptText="height" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="454.0" prefHeight="18.0" prefWidth="134.0" text="maxMutation" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="9.0" layoutY="454.0" prefHeight="18.0" prefWidth="146.0" text="maksymalna liczba mutacji" textAlignment="RIGHT" />
       <TextField fx:id="ftMaxMutation" layoutX="14.0" layoutY="472.0" prefHeight="26.0" prefWidth="134.0" promptText="width" text="10" />
-      <Label alignment="CENTER" layoutX="14.0" layoutY="497.0" prefHeight="18.0" prefWidth="134.0" text="genomeLength" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="497.0" prefHeight="18.0" prefWidth="134.0" text="dlugosc genomu" textAlignment="RIGHT" />
       <TextField fx:id="ftGenomeLength" layoutX="14.0" layoutY="516.0" prefHeight="26.0" prefWidth="134.0" promptText="height" text="10" />
-      <Label alignment="CENTER" layoutX="189.0" layoutY="14.0" prefHeight="18.0" prefWidth="134.0" text="mapType" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="14.0" prefHeight="18.0" prefWidth="134.0" text="typ mapy" textAlignment="RIGHT" />
       <ChoiceBox fx:id="ftMapType" layoutX="189.0" layoutY="32.0" prefHeight="26.0" prefWidth="134.0" />
-      <Label alignment="CENTER" layoutX="189.0" layoutY="98.0" prefHeight="18.0" prefWidth="134.0" text="biomeType" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="98.0" prefHeight="18.0" prefWidth="134.0" text="typ biomu" textAlignment="RIGHT" />
       <ChoiceBox fx:id="ftBiomeType" layoutX="189.0" layoutY="116.0" prefHeight="26.0" prefWidth="134.0" />
-      <Label alignment="CENTER" layoutX="189.0" layoutY="190.0" prefHeight="18.0" prefWidth="134.0" text="mutationType" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="190.0" prefHeight="18.0" prefWidth="134.0" text="typ mutacji" textAlignment="RIGHT" />
       <ChoiceBox fx:id="ftMutationType" layoutX="189.0" layoutY="208.0" prefHeight="26.0" prefWidth="134.0" />
-      <Label alignment="CENTER" layoutX="189.0" layoutY="279.0" prefHeight="18.0" prefWidth="134.0" text="behaviourType" textAlignment="RIGHT" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="279.0" prefHeight="18.0" prefWidth="134.0" text="typ zachowania" textAlignment="RIGHT" />
       <ChoiceBox fx:id="ftBehaviourType" layoutX="189.0" layoutY="297.0" prefHeight="26.0" prefWidth="134.0" />
-      <Slider fx:id="ftSimulationSpeed" blockIncrement="50.0" layoutX="186.0" layoutY="363.0" majorTickUnit="50.0" max="1000.0" min="50.0" minorTickCount="25" showTickMarks="true" snapToTicks="true" value="525.0" />
-      <Label alignment="CENTER" layoutX="189.0" layoutY="344.0" prefHeight="18.0" prefWidth="134.0" text="simulation speed" textAlignment="RIGHT" />
-      <Button fx:id="ftbtnFileChooser" layoutX="202.0" layoutY="398.0" mnemonicParsing="false" onAction="#singleFileChoser" prefHeight="64.0" prefWidth="108.0" text="Select File" />
+      <Slider fx:id="ftSimulationSpeed" blockIncrement="50.0" layoutX="186.0" layoutY="363.0" majorTickUnit="50.0" max="1000.0" min="100.0" minorTickCount="25" showTickMarks="true" snapToTicks="true" value="550.0" />
+      <Label alignment="CENTER" layoutX="189.0" layoutY="344.0" prefHeight="18.0" prefWidth="134.0" text="predkosc symulacji" textAlignment="RIGHT" />
+      <Button fx:id="ftbtnFileChooser" layoutX="202.0" layoutY="440.0" mnemonicParsing="false" onAction="#singleFileChoser" prefHeight="26.0" prefWidth="108.0" text="Select File" />
       <Button layoutX="202.0" layoutY="474.0" mnemonicParsing="false" onAction="#ftLoadData" prefHeight="64.0" prefWidth="50.0" text="LOAD" />
+      <CheckBox fx:id="ftSavebtn" layoutX="202.0" layoutY="400.0" mnemonicParsing="false" onAction="#SetSave" prefHeight="18.0" prefWidth="108.0" text="Zapis statystyk" />
    </children>
 </AnchorPane>

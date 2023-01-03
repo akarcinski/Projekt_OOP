@@ -10,15 +10,16 @@ public class Engine implements Runnable{
     private WorldMap mapa;
     private GameView gameView;
     private long speed;
-    private boolean saveFile=true;
+    private boolean saveFile;
     public volatile boolean flag;
     public volatile boolean terminate;
-    public Engine(WorldMap mapa, GameView gameView, long speed){
+    public Engine(WorldMap mapa, GameView gameView, long speed, boolean saveFile){
         this.mapa=mapa;
         this.gameView = gameView;
         this.speed = speed;
         flag = false;
         terminate = false;
+        this.saveFile = saveFile;
     }
 
 
@@ -26,13 +27,14 @@ public class Engine implements Runnable{
     public void run() {
         //Platform.runLater(); TUTAJ RYSOWANIE MAPY
         flag = false;
-        System.out.println("dziala");
+        //System.out.println("dziala");
         try{
             File file = new File("src/main/resources/agh/statistics.csv");
             if (!file.exists()) {
                 file.createNewFile();
             }
             PrintWriter pw = new PrintWriter(file);
+            pw.append("liczba_zyjacych_zwierzat,liczba_traw,liczba_wolnych_pol,najpopularniejszy_genotyp,srednia_energia_stworzen,srednia_zycia_stworzen\n");
             while (mapa.getAnimalList().size() > 0) {
                 while (flag) {
                     if(terminate){
@@ -46,9 +48,9 @@ public class Engine implements Runnable{
                     pw.close();
                     break;
                 }
-                System.out.println("dziala");
+                //System.out.println("dziala");
                 if (saveFile){
-                    pw.append(mapa.getLiveAnimalNum() + ", " + mapa.getGrassNum() + ", " + mapa.freeFields() + ", " + Arrays.toString(mapa.mostPopularGenes()) + ", " + mapa.avgEnergy() + ", " + mapa.avgLive());
+                    pw.append(mapa.getLiveAnimalNum() + ", " + mapa.getGrassNum() + ", " + mapa.freeFields() + ", " + Arrays.toString(mapa.mostPopularGenes()) + ", " + mapa.avgEnergy() + ", " + mapa.avgLive() + "\n");
                     pw.flush();
                 }
                 mapa.cleanMap();

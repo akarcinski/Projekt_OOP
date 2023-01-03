@@ -1,7 +1,7 @@
 Vector2d.java
  Vector2d
-Controller.java
- Controller
+SathanPortal.java
+ SathanPortal
 Earth.java
  Earth
 CrazyBehaviour.java
@@ -28,8 +28,8 @@ NormalBehaviour.java
  NormalBehaviour
 IBiomeType.java
  IBiomeType
-Main.java
- Main
+Controller.java
+ Controller
 FullMutation.java
  FullMutation
 Direction.java
@@ -39,10 +39,10 @@ ForestedBiome.java
  ForestedBiome
 Grass.java
  Grass
-SathanPortal.java
- SathanPortal
 GameView.java
  GameView
  GameView$1
 Engine.java
  Engine
+Main.java
+ Main

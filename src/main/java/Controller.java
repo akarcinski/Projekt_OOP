@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
+    private CheckBox ftSavebtn;
+    @FXML
     private Button btnMainMenu;
     @FXML
     private Button ftbtnFileChooser;
@@ -71,11 +73,17 @@ public class Controller implements Initializable {
     @FXML
     private Slider ftSimulationSpeed;
 
-    private String[] mutations = {"lekka", "calkowita"};
-    private String[] maps = {"ziemia", "pieklo"};
-    private String[] biomes = {"jungle", "trupy"};
-    private String[] behaviours = {"normalne", "szalone"};
+    private String[] mutations = {"lekka korekta", "pelna losowosc"};
+    private String[] maps = {"kula ziemska", "piekielny portal"};
+    private String[] biomes = {"zalesione rowniki", "toksyczne trupy"};
+    private String[] behaviours = {"pelna predestynacja", "nieco szalenstwa"};
     private File f;
+    private boolean save=false;
+    @FXML
+    void SetSave(ActionEvent event) {
+        save = !save;
+    }
+
     @FXML
     void ftLoadData(ActionEvent event) {
         if (f!=null) {
@@ -168,6 +176,9 @@ public class Controller implements Initializable {
                     new FullMutation(genomeLength));
             behaviourType = (ftBehaviourType.getValue().equals(behaviours[0]) ? new NormalBehaviour() : new CrazyBehaviour());
 
+            //System.out.println(ftSavebtn.getText());
+            System.out.println(save);
+
 
             WorldMap worldMap = new WorldMap(width, height, grassNum, restoreEnergy, growingRate, animalNum, startEnergy, maxEnergy,
                     energyToChild, minMutation, maxMutation, genomeLength, mapType, biomeType, mutationType, behaviourType);
@@ -179,7 +190,7 @@ public class Controller implements Initializable {
         Parent root1 = fxmlLoader.load();
 
         GameView gameViewController = fxmlLoader.getController();
-        gameViewController.receiveData(worldMap, width, height, simulationSpeed);
+        gameViewController.receiveData(worldMap, width, height, simulationSpeed, save);
 
         Stage gameView = new Stage();
         gameView.setTitle("Symulacja");

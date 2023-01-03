@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Stack moja droga");
+        primaryStage.setTitle("Zwierzatka");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
