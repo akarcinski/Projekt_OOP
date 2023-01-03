@@ -21,7 +21,7 @@ public class Engine implements Runnable{
     public void run() {
         //Platform.runLater(); TUTAJ RYSOWANIE MAPY
         flag = false;
-        System.out.println("dziala");
+        //System.out.println("dziala");
         try{
             while (mapa.getAnimalList().size() > 0) {
                 while (flag) {
@@ -33,7 +33,7 @@ public class Engine implements Runnable{
 
                 if(terminate)
                     break;
-                System.out.println("dziala");
+                //System.out.println("dziala");
 
                 mapa.cleanMap();
                 mapa.moveAnimals();
@@ -42,7 +42,7 @@ public class Engine implements Runnable{
                 mapa.placeGrass();
                 mapa.changeGenesAnimals();
                 gameView.updateGrid();
-                System.out.println("liczba fields "+mapa.freeFields());
+                //System.out.println("liczba fields "+mapa.freeFields());
                 Thread.sleep(speed);
 
             }
