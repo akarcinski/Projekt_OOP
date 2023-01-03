@@ -107,6 +107,18 @@ public class GameView {
         }
     }
 
+    private boolean showing=false;
+
+    @FXML
+    void gvShowWithGenome(ActionEvent event) throws FileNotFoundException {
+        showing = !showing;
+        updateGrid();
+    }
+
+    @FXML
+    void gvUnselect(ActionEvent event) {
+        selected = null;
+    }
 
     @FXML
     void btnClose(ActionEvent event){
@@ -181,7 +193,10 @@ public class GameView {
                     gvDeathDay.setText(Integer.toString(selected.getDeath()));
 
                 gvEatenGrasses.setText(Integer.toString(selected.getEatenGrass()));
-                gvAliveDays.setText(Integer.toString(map.getDay() - selected.getBorn()));
+                if (selected.getDeath() == -1)
+                    gvAliveDays.setText(Integer.toString(map.getDay() - selected.getBorn()));
+                else
+                    gvAliveDays.setText(Integer.toString(selected.getDeath()));
             }
 
             gvLiveAnimalNum.setText(Integer.toString(map.getLiveAnimalNum()));
@@ -201,12 +216,27 @@ public class GameView {
                 }
             //gvMap.add(new Label("123"),0,0);
 
+            if (selected != null) {
+                VBox vBox = animalElement(pref[selected.getPosition().getX()][selected.getPosition().getY()], selected.getDirection(), selected.getEnergy(), true);
+                gvMap.add(vBox, selected.getPosition().getX(), selected.getPosition().getY());
+                grid[selected.getPosition().getX()][selected.getPosition().getY()] = true;
+            }
+
 
 
             for (Animal animal : animals) {
                 if (animal==null || grid[animal.getPosition().getX()][animal.getPosition().getY()])
                     continue;
-                VBox vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection(), animal.getEnergy());
+                VBox vBox;
+                if (showing) {
+                    if (Arrays.equals(animal.getGenes(), map.mostPopularGenes()))
+                        vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection(), animal.getEnergy(), true);
+                    else
+                        vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection(), animal.getEnergy(), false);
+                }
+                else
+                    vBox = animalElement(pref[animal.getPosition().getX()][animal.getPosition().getY()], animal.getDirection(), animal.getEnergy(), false);
+
                 gvMap.add(vBox, animal.getPosition().getX(), animal.getPosition().getY());
                 grid[animal.getPosition().getX()][animal.getPosition().getY()] = true;
                 //gvMap.styleProperty().set("");
@@ -237,7 +267,7 @@ public class GameView {
         });
     }
 
-    public VBox animalElement(Boolean type, Direction dir, int energy) {
+    public VBox animalElement(Boolean type, Direction dir, int energy, boolean flag) {
         VBox vBox = new VBox();
         Image image = null;
         ImageView imageView;
@@ -279,6 +309,14 @@ public class GameView {
         energyIndicator.setPrefSize(cellWidth,10);
         energyIndicator.setMaxSize(cellWidth, 10);
         energyIndicator.setAlignment(Pos.CENTER);
+        if (flag) {
+            energyIndicator.setPrefSize(cellWidth, 3);
+            energyIndicator.setMaxSize(cellWidth, 3);
+            energyIndicator.setStyle("-fx-border-color: red;\n" +
+                    //"-fx-border-insets: 5;\n" +
+                    "-fx-border-width: 2;\n" +
+                    "-fx-border-style: solid;\n");
+        }
 
         imageView = new ImageView(image);
         imageView.setFitHeight(cellHeight-17);
